@@ -9,7 +9,7 @@ set(0,'DefaultAxesBox','off')
 if strcmpi(computer,'laptop')
     figSaveLocation = ['C:\Users\Alex\Desktop\Harvard\Dropbox\TrackballData','\ExpNum',num2str(expNum),'\Figures\','fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'/'];
 elseif strcmpi(computer,'desktop')
-    figSaveLocation = ['C:\Alex\Dropbox\TrackballData','\ExpNum',num2str(expNum),'\Figures\','fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'/'];
+    figSaveLocation = ['C:\Users\Alex\Documents\TrackballData','\ExpNum',num2str(expNum),'\Figures\','fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'/'];    
 end
 if ~isdir(figSaveLocation)
     mkdir(figSaveLocation)
@@ -22,7 +22,7 @@ if strcmpi(computer,'laptop')
     processedDataSaveLocation = [pathName,'\ProcessedData\fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'\'];
     processedDataFileName = [processedDataSaveLocation,'ProcessedData','_ExpNum',num2str(expNum),'_fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'.mat'];
 elseif strcmpi(computer,'desktop')
-    pathName = ['C:\Alex\Dropbox\TrackballData\ExpNum',num2str(expNum)];
+    pathName = ['C:\Users\Alex\Documents\TrackballData\ExpNum',num2str(expNum)];
     processedDataSaveLocation = [pathName,'\ProcessedData\fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'\'];
     processedDataFileName = [processedDataSaveLocation,'ProcessedData','_ExpNum',num2str(expNum),'_fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'.mat'];
 end
@@ -142,5 +142,6 @@ figData.flyExpNum = flyExpNum;
 figData.stimStartIndex = stimStartIndex;
 figData.stimEndIndex = stimEndIndex;
 
-figPlot(figData,data,figSaveLocation)
+% figPlot(figData,data,figSaveLocation)
+histPlotTemp(figData,data,figSaveLocation)
 
