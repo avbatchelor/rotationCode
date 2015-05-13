@@ -10,6 +10,9 @@ if strcmpi(computer,'laptop')
     figSaveLocation = ['C:\Users\Alex\Desktop\Harvard\Dropbox\TrackballData','\ExpNum',num2str(expNum),'\Figures\','fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'/'];
 elseif strcmpi(computer,'desktop')
     figSaveLocation = ['C:\Users\Alex\Documents\TrackballData','\ExpNum',num2str(expNum),'\Figures\','fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'/'];    
+elseif strcmpi(computer,'desktop2')
+    figSaveLocation = ['C:\Users\Alex\Documents\Data\TrackballData','\ExpNum',num2str(expNum),'\Figures\','fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'/'];
+    
 end
 if ~isdir(figSaveLocation)
     mkdir(figSaveLocation)
@@ -19,13 +22,13 @@ end
 %% load processed data
 if strcmpi(computer,'laptop')
     pathName = ['C:\Users\Alex\Desktop\Harvard\Dropbox\TrackballData\ExpNum',num2str(expNum)];
-    processedDataSaveLocation = [pathName,'\ProcessedData\fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'\'];
-    processedDataFileName = [processedDataSaveLocation,'ProcessedData','_ExpNum',num2str(expNum),'_fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'.mat'];
 elseif strcmpi(computer,'desktop')
     pathName = ['C:\Users\Alex\Documents\TrackballData\ExpNum',num2str(expNum)];
-    processedDataSaveLocation = [pathName,'\ProcessedData\fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'\'];
-    processedDataFileName = [processedDataSaveLocation,'ProcessedData','_ExpNum',num2str(expNum),'_fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'.mat'];
+elseif strcmpi(computer,'desktop2')
+    pathName = ['C:\Users\Alex\Documents\Data\TrackballData\ExpNum',num2str(expNum)];
 end
+processedDataSaveLocation = [pathName,'\ProcessedData\fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'\'];
+processedDataFileName = [processedDataSaveLocation,'ProcessedData','_ExpNum',num2str(expNum),'_fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'.mat'];
 
 load(processedDataFileName)
 
@@ -142,6 +145,6 @@ figData.flyExpNum = flyExpNum;
 figData.stimStartIndex = stimStartIndex;
 figData.stimEndIndex = stimEndIndex;
 
-% figPlot(figData,data,figSaveLocation)
-histPlotTemp(figData,data,figSaveLocation)
+figPlot(figData,data,figSaveLocation)
+% histPlotTemp(figData,data,figSaveLocation)
 

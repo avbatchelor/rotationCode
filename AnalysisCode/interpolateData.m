@@ -19,11 +19,12 @@ function interpolateData(expNum,flyNum,flyExpNum,computer)
 
 if strcmpi(computer,'laptop')
     pathName = ['C:\Users\Alex\Desktop\Harvard\Dropbox\TrackballData\ExpNum',num2str(expNum)];
-    dataSaveLocation = [pathName,'\RawData\fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'\'];
 elseif strcmpi(computer,'desktop')
     pathName = ['C:\Users\Alex\Documents\TrackballData\ExpNum',num2str(expNum)];
-    dataSaveLocation = [pathName,'\RawData\fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'\'];
+elseif strcmpi(computer,'desktop2')
+    pathName = ['C:\Users\Alex\Documents\Data\TrackballData\ExpNum',num2str(expNum)];
 end
+dataSaveLocation = [pathName,'\RawData\fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'\'];
 
 cd(dataSaveLocation)
 fileNames = dir('*.mat');
@@ -61,7 +62,7 @@ for n = 1:numTrials;
     x_filt = filtfilt(kb, ka, data.trialData.x);
     y_filt = filtfilt(kb, ka, data.trialData.y);
     
-    % calculate acquisiton rate 
+    % calculate acquisiton rate
     mouseAcquisitionRate = median(diff(data.trialData.t));
     
     % interpolate filtered data
@@ -74,7 +75,7 @@ for n = 1:numTrials;
     Vx(trialNumber,:) = diff(xInterpFilt(trialNumber,:))./diff(interpTime);
     Vy(trialNumber,:) = diff(yInterpFilt(trialNumber,:))./diff(interpTime);
     
-%% get data specific to the trial
+    %% get data specific to the trial
     if isfield(data.trialData,'speaker')
         speaker{trialNumber}=data.trialData.speaker;
     end
@@ -104,7 +105,7 @@ for n = 1:numTrials;
         vidInitialTriggerTime(trialNumber,:)=data.trialData.vidInitialTriggerTime;
     end
     AOInitialTriggerTime(trialNumber,:)=data.trialData.AOInitialTriggerTime;
-
+    
     
     numDataPoints = size(xInterpFilt,2);
     startIndex=((data.stim.restTime)*1000)+1;
@@ -121,8 +122,8 @@ for n = 1:numTrials;
             angleCFStart(trialNumber,m) =  (180/pi) * (atan2(det([straightVector',comparisonVector']),dot(straightVector,comparisonVector)));
         end
     end
-
-
+    
+    
     
 end
 
@@ -157,7 +158,7 @@ data.processedData.mouseAcquisitionRate = mouseAcquisitionRate;
 if exist('pipNum','var')
     data.processedData.pipNum = cell2mat(pipNum);
 end
-    data.actualNumTrials=numTrials;
+data.actualNumTrials=numTrials;
 
 
 %% Get rid of half a second at beginning of trial

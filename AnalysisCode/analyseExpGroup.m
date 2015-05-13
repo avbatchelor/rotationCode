@@ -25,6 +25,8 @@ switch expNum
         flyExperiments = [];
     case 11
         flyExperiments = [];
+    case 12
+        flyExperiments = [20 3];
 end
 
 close all
