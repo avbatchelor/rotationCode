@@ -22,7 +22,7 @@ if strcmpi(computer,'laptop')
 elseif strcmpi(computer,'desktop')
     pathName = ['C:\Users\Alex\Documents\TrackballData\ExpNum',num2str(expNum)];
 elseif strcmpi(computer,'desktop2')
-    pathName = ['C:\Users\Alex\Documents\Data\TrackballData\ExpNum',num2str(expNum)];
+    pathName = ['C:\Users\Alex\Documents\Data\trackballData\ExpNum',num2str(expNum)];
 end
 dataSaveLocation = [pathName,'\RawData\fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'\'];
 
