@@ -5,7 +5,7 @@ function figPlot(figData,data,figSaveLocation)
 v2struct(figData)
 
 %% Colors for graphs
-lineColors = mat2cell(distinguishable_colors(length(trials),'w'),ones(1,length(trials)));
+lineColors = mat2cell(distinguishable_colors(length(trials),'w'),[1,3]);
 
 %% Plot mean position aligned to the beginning of trial
 if expNum==9 
@@ -59,7 +59,7 @@ print(fig,'-dmeta',filename{3},'-r300')
 fig = figure();
 xlimits = [];
 for i = 1:length(trials)
-    posend(i) = subplot(ceil(length(trials)/2),2,i);
+    posend{i} = subplot(ceil(length(trials)/2),2,i);
     set(fig,'units','normalized','outerposition',[0 0 1 1]);
     line([zeros(length(xBefore{i}),1),xBefore{i}]',[zeros(length(xBefore{i}),1),yBefore{i}]','Color','k');
     hold on 
@@ -68,7 +68,7 @@ for i = 1:length(trials)
     xlimits = [xlimits xlim];
 end
 
-linkaxes(posend)
+linkaxes(cell2mat(posend))
 xlim([-max(abs(xlimits)) max(abs(xlimits))])
 ylim([-0.75 0.5])
 xlim([-0.5 0.5])
@@ -85,15 +85,15 @@ bins = -0.5:0.01:0.5;
 xlimits = [];
 for i = 1:length(trials)
     
-    histo(i) = subplot(ceil(length(trials)/2),2,i);
+    histo{i} = subplot(ceil(length(trials)/2),2,i);
     set(fig,'units','normalized','outerposition',[0 0 1 1]);
-    hist(histo(i),xAfter{i},bins)
+    hist(histo{i},xAfter{i},bins)
     h = findobj(gca,'Type','patch');
     set(h,'FaceColor',lineColors{i},'EdgeColor','w')
     %title(leg{i});
     xlimits = [-0.25 0.25];
 end
-linkaxes(histo)
+linkaxes(cell2mat(histo))
 xlim([-max(abs(xlimits)) max(abs(xlimits))])
     suplabel('x position (cm)','x')
     suplabel('frequency','y')
@@ -533,14 +533,14 @@ fig = figure();
 ylimits = [];
 set(fig,'units','normalized','outerposition',[0 0 1 1]);
 for i = 1:length(pipStarts)
-    posend(i) = subplot(2,ceil(length(pipStarts)/2),i);
+    posend{i} = subplot(2,ceil(length(pipStarts)/2),i);
     plot(1:length(trials),meanX(:,-500+round(pipEnds(i)./40)));
     hold on 
     plot(1:length(trials),zeros(1,length(trials)),'k')
     title(num2str(i))
     ylimits = [ylimits ylim];
 end
-linkaxes(posend,'y')
+linkaxes(cell2mat(posend),'y')
 ylim([-max(abs(ylimits)) max(abs(ylimits))])
 suplabel('trial type','x')
 suplabel('Lateral position','y')
@@ -556,14 +556,14 @@ fig = figure();
 ylimits = [];
 set(fig,'units','normalized','outerposition',[0 0 1 1]);
 for i = 1:length(pipStarts)
-    posend(i) = subplot(2,ceil(length(pipStarts)/2),i);
+    posend{i} = subplot(2,ceil(length(pipStarts)/2),i);
     plot(1:length(trials),meanVx(:,-500+round(pipEnds(i)./40)));
     hold on 
     plot(1:length(trials),zeros(1,length(trials)),'k')
     title(num2str(i))
     ylimits = [ylimits ylim];
 end
-linkaxes(posend,'y')
+linkaxes(cell2mat(posend),'y')
 ylim([-max(abs(ylimits)) max(abs(ylimits))])
 suplabel('trial type','x')
 suplabel('Lateral velocity','y')
@@ -581,13 +581,13 @@ fig = figure();
 ylimits = [];
 set(fig,'units','normalized','outerposition',[0 0 1 1]);
 for i = 1:length(pipStarts)
-    posend(i) = subplot(2,ceil(length(pipStarts)/2),i);
+    posend{i} = subplot(2,ceil(length(pipStarts)/2),i);
     plot(1:length(trials),meanVy(:,-500+round(pipEnds(i)./40)));
     hold on 
     title(num2str(i))
     ylimits = [ylimits ylim];
 end
-linkaxes(posend,'y')
+linkaxes(cell2mat(posend),'y')
 ylim([min(ylimits) max(ylimits)])
 suplabel('trial type','x')
 suplabel('Forward velocity','y')
@@ -603,14 +603,14 @@ set(fig,'units','normalized','outerposition',[0 0 1 1]);
 % intensities = [-sort(unique(data.processedData.intensity),'descend') unique(data.processedData.intensity)];
 % intensities = [log(unique(data.processedData.intensity)) sort(-log(unique(data.processedData.intensity)))];
 for i = 1:length(pipStarts)
-    posend(i) = subplot(2,ceil(length(pipStarts)/2),i);
+    posend{i} = subplot(2,ceil(length(pipStarts)/2),i);
     plot(intensities,meanAngle(:,-500+round(pipEnds(i)./40)));
     hold on 
     plot(intensities,zeros(1,length(trials)),'k')
     title(num2str(i))
     ylimits = [ylimits ylim];
 end
-linkaxes(posend,'y')
+linkaxes(cell2mat(posend),'y')
 ylim([-max(abs(ylimits)) max(abs(ylimits))])
 suplabel('trial type','x')
 suplabel('Angle relative to y axis','y')

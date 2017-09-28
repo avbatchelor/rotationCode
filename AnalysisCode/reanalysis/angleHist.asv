@@ -1,0 +1,38 @@
+function angleHist(figData,figSaveLocation)
+
+
+%% unpack
+v2struct(figData)
+
+%% Colors for graphs
+lineColors = mat2cell(distinguishable_colors(length(trials),'w'),ones(1,length(trials)));
+figure
+
+%% Histogram settings
+% bins = -0.5:0.01:0.5;
+xlimits = [];
+
+%% Plot position at end of stimulus
+straightVector = [0 1];
+
+for i = 1:length(trials)
+    
+    xMat = xAfter{i};
+    yMat = yAfter{i};
+    
+    for j = 1:length(xMat)
+        comparisonVector = [xMat(j) yMat(j)];
+        angle(j) =  (180/pi) * (atan2(det([straightVector',comparisonVector']),dot(straightVector,comparisonVector)));
+        histo(i) = subplot(ceil(length(trials)/2),2,i);
+        hist(histo(i),xAfter{i},bins)
+        h = findobj(gca,'Type','patch');
+    set(h,'FaceColor',lineColors{i},'EdgeColor','w')
+    end
+    
+end
+
+linkaxes(histo)
+xlim([-max(abs(xlimits)) max(abs(xlimits))])
+suplabel('x position (cm)','x')
+suplabel('frequency','y')
+

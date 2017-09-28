@@ -145,6 +145,7 @@ figData.flyExpNum = flyExpNum;
 figData.stimStartIndex = stimStartIndex;
 figData.stimEndIndex = stimEndIndex;
 
-figPlot(figData,data,figSaveLocation)
+% figPlot(figData,data,figSaveLocation)
+angleHist(figData,figSaveLocation)
 % histPlotTemp(figData,data,figSaveLocation)
 
