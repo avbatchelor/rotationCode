@@ -35,7 +35,7 @@ for i = 1:length(trials)
         angle(j) =  -(180/pi) * (atan2(det([straightVector',comparisonVector']),dot(straightVector,comparisonVector)));
     end
     
-    if ~length(trials) == 1 
+    if ~(length(trials) == 1) 
         histo(i) = subplot(ceil(length(trials)/2),2,subplotOrder(i));
         hist(histo(i),angle,bins)
     else 
@@ -47,7 +47,11 @@ for i = 1:length(trials)
         noXAxisSettings
     else 
         bottomAxisSettings
+        xlabel('Angle')
+        ylabel('Counts')
     end
+    title(leg{i})
+    ylim([0 60])
     
 end
 

@@ -35,10 +35,12 @@ for i = 1:length(trials)
         angle(j) =  -(180/pi) * (atan2(det([straightVector',comparisonVector']),dot(straightVector,comparisonVector)));
     end
     
-    if ~length(trials == 1) 
-        
-    histo(i) = subplot(ceil(length(trials)/2),2,subplotOrder(i));
-    hist(histo(i),angle,bins)
+    if ~(length(trials) == 1) 
+        histo(i) = subplot(ceil(length(trials)/2),2,subplotOrder(i));
+        hist(histo(i),angle,bins)
+    else 
+        hist(angle,bins)
+    end
     h = findobj(gca,'Type','patch');
     set(h,'FaceColor',lineColors{i},'EdgeColor','w')
     if i ~= 1 && i ~= 10 
@@ -46,8 +48,10 @@ for i = 1:length(trials)
     else 
         bottomAxisSettings
     end
+    title('
     
 end
 
-linkaxes(histo)
-
+if ~length(trials) == 1 
+    linkaxes(histo)
+end

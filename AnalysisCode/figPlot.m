@@ -1,5 +1,6 @@
 function figPlot(figData,data,figSaveLocation)
 
+angleHist(figData,figSaveLocation)
 
 %% unpack 
 v2struct(figData)
@@ -51,7 +52,7 @@ xlabel('x position (cm)')
 ylabel('y position (cm)')
 set(gca,'Box','off')
 %title({['Experiment Number ',num2str(expNum),', Fly ',num2str(flyNum),', Fly Experiment Number ',num2str(flyExpNum),', ',data.date];['Fly condition = ',data.flycond];'Median position relative to position at start of stimulus'});
-legend(leg,'Location','SouthOutside')
+legend(leg,'Location','EastOutside')
 filename{3} = [figSaveLocation,'3.emf'];
 print(fig,'-dmeta',filename{3},'-r300')
 
