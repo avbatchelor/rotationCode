@@ -8,7 +8,7 @@ close all
 set(0,'DefaultAxesFontSize', 16)
 set(0,'DefaultFigureColor','w')
 
-%% Lookup folder location for current computer 
+%% Lookup folder location for cu
 if strcmpi(computer,'laptop')
     figSaveLocation = ['C:\Users\Alex\Desktop\Harvard\Dropbox\TrackballData','\ExpNum',num2str(expNum),'\Figures\','Group\'];
 elseif strcmpi(computer,'desktop')
@@ -20,10 +20,9 @@ if ~isdir(figSaveLocation)
     mkdir(figSaveLocation)
 end
 
-%% Load and pool data for each experiment
 for n = 1:size(flyExperiments,1)
     
-    %% Load processed data
+    %% load processed data
     if strcmpi(computer,'laptop')
         pathName = ['C:\Users\Alex\Desktop\Harvard\Dropbox\TrackballData\ExpNum',num2str(expNum)];
     elseif strcmpi(computer,'desktop')
@@ -37,7 +36,7 @@ for n = 1:size(flyExperiments,1)
 
     load(processedDataFileName)
     
-    %% Get trials
+    % Get trials
     netV = sqrt((data.processedData.Vy.^2)+(data.processedData.Vx.^2));
     [trials leg stimStartIndex stimEndIndex] = getTrials(expNum,data,netV);
     
@@ -117,6 +116,10 @@ end
 
 
 %% Get data specific to the experiment
+
+
+
+
 if isfield(data.stim,'pipStarts')
     if iscell(data.stim.pipStarts)
         pipStarts = data.stim.pipStarts{end};
@@ -180,6 +183,6 @@ figData.flyExpNum = 'Group';
 figData.stimStartIndex = stimStartIndex;
 figData.stimEndIndex = stimEndIndex;
 
-figPlot(figData,data,figSaveLocation)
-%angleHist(figData,figSaveLocation)
+% figPlot(figData,data,figSaveLocation)
+angleHist(figData,figSaveLocation)
 

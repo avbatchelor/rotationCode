@@ -152,12 +152,7 @@ elseif trialVect(1) <= 0
 end
 
 % Rotate data 
-for i = 1:numTrials
-    rotatedPositions = R*[xPosition(i,:);yPosition(i,:)];
-    xPosition(i,:) = rotatedPositions(1,:);
-    yPosition(i,:) = rotatedPositions(2,:);
-end
-
+rotDisp(count,:,:) = R*[xPosition;yPosition];
 
 %% Compute dependent data
 % Calculate x and y velocities

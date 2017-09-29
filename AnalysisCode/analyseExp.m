@@ -1,7 +1,6 @@
 function analyseExp(expNum,flyNum,flyExpNum,computer)
 
 % Creates graphs
-
 close all
 set(0,'DefaultAxesFontSize', 30)
 set(0,'DefaultFigureColor','w')
@@ -12,12 +11,10 @@ elseif strcmpi(computer,'desktop')
     figSaveLocation = ['C:\Users\Alex\Documents\TrackballData','\ExpNum',num2str(expNum),'\Figures\','fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'/'];    
 elseif strcmpi(computer,'desktop2')
     figSaveLocation = ['C:\Users\Alex\Documents\Data\TrackballData','\ExpNum',num2str(expNum),'\Figures\','fly',num2str(flyNum),'_flyExpNum',num2str(flyExpNum),'/'];
-    
 end
 if ~isdir(figSaveLocation)
     mkdir(figSaveLocation)
 end
-
 
 %% load processed data
 if strcmpi(computer,'laptop')
@@ -85,10 +82,6 @@ if expNum ==9
 end
 
 %% Get data specific to the experiment 
-
-
-
-
 if isfield(data.stim,'pipStarts')
     if iscell(data.stim.pipStarts)
         pipStarts = data.stim.pipStarts{end};
@@ -145,7 +138,7 @@ figData.flyExpNum = flyExpNum;
 figData.stimStartIndex = stimStartIndex;
 figData.stimEndIndex = stimEndIndex;
 
-% figPlot(figData,data,figSaveLocation)
+%figPlot(figData,data,figSaveLocation)
 angleHist(figData,figSaveLocation)
 % histPlotTemp(figData,data,figSaveLocation)
 

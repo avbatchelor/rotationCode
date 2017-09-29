@@ -59,13 +59,14 @@ print(fig,'-dmeta',filename{3},'-r300')
 fig = figure();
 xlimits = [];
 for i = 1:length(trials)
-    posend(i) = subplot(ceil(length(trials)/2),2,i);
+    posend(i) = subplot(2,ceil(length(trials)/2),i);
     set(fig,'units','normalized','outerposition',[0 0 1 1]);
     line([zeros(length(xBefore{i}),1),xBefore{i}]',[zeros(length(xBefore{i}),1),yBefore{i}]','Color','k');
     hold on 
     plot([zeros(length(xAfter{i}),1),xAfter{i}]',[zeros(length(xAfter{i}),1),yAfter{i}]','Color',lineColors{i});
     title(leg{i});
     xlimits = [xlimits xlim];
+    axis square
 end
 
 linkaxes(posend)
@@ -74,7 +75,6 @@ ylim([-0.75 0.5])
 xlim([-0.5 0.5])
 suplabel('x position (cm)','x')
 suplabel('y position (cm)','y')
-
 
 filename{4} = [figSaveLocation,'4.emf'];
 print(fig,'-dmeta',filename{4},'-r300')

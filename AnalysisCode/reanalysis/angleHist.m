@@ -9,7 +9,7 @@ lineColors = mat2cell(distinguishable_colors(length(trials),'w'),ones(1,length(t
 figure
 
 %% For tight subplots
-subplot = @(m,n,p) subtightplot (m, n, p, [0.01 0.05], [0.1 0.15], [0.1 0.01]);
+% subplot = @(m,n,p) subtightplot (m, n, p, [0.01 0.05], [0.1 0.15], [0.1 0.01]);
 
 %% Histogram settings
 bins = -180:5:180;
@@ -35,8 +35,12 @@ for i = 1:length(trials)
         angle(j) =  -(180/pi) * (atan2(det([straightVector',comparisonVector']),dot(straightVector,comparisonVector)));
     end
     
-    histo(i) = subplot(ceil(length(trials)/2),2,subplotOrder(i));
-    hist(histo(i),angle,bins)
+    if ~length(trials) == 1 
+        histo(i) = subplot(ceil(length(trials)/2),2,subplotOrder(i));
+        hist(histo(i),angle,bins)
+    else 
+        hist(angle,bins)
+    end
     h = findobj(gca,'Type','patch');
     set(h,'FaceColor',lineColors{i},'EdgeColor','w')
     if i ~= 1 && i ~= 10 
@@ -47,5 +51,6 @@ for i = 1:length(trials)
     
 end
 
-linkaxes(histo)
-
+if ~length(trials) == 1 
+    linkaxes(histo)
+end
